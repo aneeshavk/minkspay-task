@@ -1,1 +1,65 @@
-/* You can add global styles to this file, and also import other style files */
+$ff: "Lato", sans-serif;
+$base: #63b175;
+
+html {
+  font-family: $ff;
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+}
+
+input, button {
+    font-family: $ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.btn {
+  width: 100%;
+  display: block;
+  font-size: 18px;
+  background: none;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 12px 20px;
+  &.main {
+    background: $base;
+    color: #fff;
+  }
+  &.blue {
+    background: #637eb1;
+    color: #fff;
+  }
+}
+
+.form-item {
+  margin-bottom: 12px;
+  label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 18px;
+  }
+  input {
+    font-family: $ff;
+    font-size: 20px;
+    border: 1px solid #dedede;
+    border-radius: 3px;
+    padding: 8px 16px;
+    width: 100%;
+  }
+}
+
+.full-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+  background: #63b175;
+}

@@ -1,0 +1,29 @@
+.hawk-loader {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(#fff, 0.3);
+  .load {
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-bottom: 3px solid #288bcd;
+    padding: 8px 12px;
+    box-shadow: 0 0 15px rgba(#000, 0.17);
+    border-radius: 3px;
+    img {
+      width: 50px;
+    }
+    p {
+      margin: 0;
+      font-weight: 700;
+      margin-right: 16px;
+    }
+  }
+}

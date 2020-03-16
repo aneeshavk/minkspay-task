@@ -1,0 +1,12 @@
+<div class="toast-list lvl-top">
+  <div
+    *ngFor="let t of toastInstances; let i = index"
+    class="toast"
+    [ngClass]="{ ret: t.removing }"
+  >
+    <p>{{ t.data.message }}</p>
+    <div class="action">
+      <i (click)="removeToastByIndex(i)" class="material-icons">close</i>
+    </div>
+  </div>
+</div>

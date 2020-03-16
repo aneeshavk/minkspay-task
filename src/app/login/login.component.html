@@ -1,0 +1,23 @@
+<div class="full-wrapper">
+  <div [formGroup]="loginForm" class="login">
+    <h1>Minkspay</h1>
+    <div class="form-item">
+      <label for="email">Email</label>
+      <input [formControlName]="'email'" id="email" type="text" />
+    </div>
+
+    <div class="form-item">
+      <label for="password">Password</label>
+      <input [formControlName]="'password'" id="password" type="password" />
+    </div>
+
+    <div class="actioner">
+      <button (click)="onSubmit(loginForm.value)" class="btn main">
+        Login to Minkspay
+      </button>
+      <button [routerLink]="['/register']" class="btn blue">
+        New user, register
+      </button>
+    </div>
+  </div>
+</div>

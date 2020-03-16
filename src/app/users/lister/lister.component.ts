@@ -1,0 +1,71 @@
+import { Component } from "@angular/core";
+import { UserService } from "src/app/services/user.service";
+import { User } from "src/app/models/user.model";
+import { LoaderService } from "src/app/services/loader.service";
+import { ToastService } from "src/app/services/toaster.service";
+
+@Component({
+  selector: "app-user-lister",
+  templateUrl: "./lister.component.html",
+  styleUrls: ["./lister.component.scss"]
+})
+export class UserListerComponent {
+  public userList: User[] = [];
+
+  private page = 1;
+
+  private loadingDone = false;
+
+  public editUser: User;
+
+  constructor(
+    private users: UserService,
+    private loader: LoaderService,
+    private toaster: ToastService
+  ) {
+    this.loadUsers();
+  }
+
+  private loadUsers() {
+    if (this.loadingDone) {
+      return;
+    }
+
+    this.loader.show();
+    this.users.list(this.page).subscribe(
+      r => {
+        this.loader.hide();
+        if (r.data.length === 0) {
+          this.loadingDone = true;
+        }
+        this.userList = this.userList.concat(r.data);
+      },
+      e => {
+        this.loader.hide();
+        if (e && e.error && e.error.error) {
+          this.toaster.show(e.error.error);
+        } else {
+          this.toaster.show(
+            "An unknown error occurred while trying to load users please try again."
+          );
+        }
+      }
+    );
+  }
+
+  public onEdit(user: User) {
+    this.editUser = user;
+  }
+
+  public onUpdateComplete(user: User) {
+    if (user) {
+      const foundUser = this.userList.find(x => x.id === user.id);
+      const splitName = user.name.split(" ");
+
+      foundUser.first_name = splitName[0];
+      foundUser.last_name = splitName[1] ? splitName[1] : "";
+    }
+
+    this.editUser = null;
+  }
+}

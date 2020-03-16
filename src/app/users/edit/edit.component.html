@@ -1,0 +1,33 @@
+<div [formGroup]="userForm" class="popup">
+  <div class="popup-box">
+    <div (click)="closeAction()" class="close-action">
+      <i class="material-icons">
+        close
+      </i>
+    </div>
+    <div class="header">
+      <h1>Edit User</h1>
+    </div>
+
+    <div class="form-item">
+      <label for="name">Name</label>
+      <input
+        [formControlName]="'name'"
+        id="name"
+        type="text"
+        placeholder="Name"
+      />
+    </div>
+
+    <div class="form-item">
+      <label for="job">Job</label>
+      <input [formControlName]="'job'" id="job" type="text" placeholder="Job" />
+    </div>
+
+    <div class="actions">
+      <button (click)="saveUser(userForm.value)" class="btn main">
+        Update user
+      </button>
+    </div>
+  </div>
+</div>
