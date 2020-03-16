@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectorRef } from "@angular/core";
 import { UserService } from "src/app/services/user.service";
 import { User } from "src/app/models/user.model";
 import { LoaderService } from "src/app/services/loader.service";
@@ -13,11 +13,23 @@ import { PromptService } from "src/app/services/prompt.service";
 export class UserListerComponent {
   public userList: User[] = [];
 
+  public searchResults: User[] = [];
+
   private page = 1;
 
   private loadingDone = false;
 
   public editUser: User;
+
+  public search = "";
+
+  public get searchedList() {
+    if (this.search && this.search.trim().length > 0) {
+      return this.searchResults;
+    } else {
+      return this.userList;
+    }
+  }
 
   constructor(
     private users: UserService,
@@ -99,5 +111,18 @@ export class UserListerComponent {
         }
       }
     );
+  }
+
+  onSearchChange(s) {
+    if (s) {
+      const rgx = new RegExp("^" + s, "i");
+      this.searchResults = this.userList.filter(
+        x => x.first_name.match(rgx) || x.last_name.match(rgx)
+      );
+      this.search = s;
+    } else {
+      this.search = null;
+      this.searchResults = [];
+    }
   }
 }

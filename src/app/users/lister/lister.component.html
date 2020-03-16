@@ -2,12 +2,17 @@
   <h1>Users</h1>
   <div class="search-form">
     <i class="material-icons">search</i>
-    <input type="text" placeholder="search" />
+    <input
+      [ngModel]="search"
+      (ngModelChange)="onSearchChange($event)"
+      type="text"
+      placeholder="search"
+    />
   </div>
 </div>
 
 <div class="user-list">
-  <div *ngFor="let user of userList" class="user">
+  <div *ngFor="let user of searchedList" class="user">
     <div class="data">
       <div class="lefter">
         <div
