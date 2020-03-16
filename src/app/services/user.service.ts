@@ -43,4 +43,8 @@ export class UserService {
   public save(id: number, user: User) {
     return this.http.put<User>(`${this.baseUrl}users/${id}`, user);
   }
+
+  public delete(user: User) {
+    return this.http.delete(`${this.baseUrl}users/${user.id}`);
+  }
 }

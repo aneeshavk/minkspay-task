@@ -35,6 +35,10 @@ input, button {
     background: #637eb1;
     color: #fff;
   }
+  &.danger {
+    background: red;
+    color: #fff;
+  }
 }
 
 .form-item {

@@ -1,0 +1,21 @@
+<div
+  *ngFor="let prompt of activePrompts$; let i = index"
+  class="prompt-wrapper lvl-toppest"
+>
+  <div class="prompt-box">
+    <div class="texter">
+      <h1>{{ prompt.heading }}</h1>
+      <p>
+        {{ prompt.message }}
+      </p>
+    </div>
+    <div class="actioner">
+      <button (click)="negativeAction(prompt, i)" class="btn main">
+        {{ prompt.negativeButton }}
+      </button>
+      <button (click)="positiveAction(prompt, i)" class="btn danger">
+        {{ prompt.positiveButton }}
+      </button>
+    </div>
+  </div>
+</div>

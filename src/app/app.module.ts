@@ -14,6 +14,7 @@ import { LayoutComponent } from "./layout/layout.component";
 import { UserListerComponent } from "./users/lister/lister.component";
 import { CommonModule } from "@angular/common";
 import { UserEditComponent } from "./users/edit/edit.component";
+import { PromptComponent } from "./prompt/prompt.component";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { UserEditComponent } from "./users/edit/edit.component";
     RegisterComponent,
     LayoutComponent,
     UserListerComponent,
-    UserEditComponent
+    UserEditComponent,
+    PromptComponent
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { UserService } from "src/app/services/user.service";
 import { User } from "src/app/models/user.model";
 import { LoaderService } from "src/app/services/loader.service";
 import { ToastService } from "src/app/services/toaster.service";
+import { PromptService } from "src/app/services/prompt.service";
 
 @Component({
   selector: "app-user-lister",
@@ -21,7 +22,8 @@ export class UserListerComponent {
   constructor(
     private users: UserService,
     private loader: LoaderService,
-    private toaster: ToastService
+    private toaster: ToastService,
+    private prompt: PromptService
   ) {
     this.loadUsers();
   }
@@ -67,5 +69,35 @@ export class UserListerComponent {
     }
 
     this.editUser = null;
+  }
+
+  public deleteAction(user: User) {
+    this.prompt.showWithButton(
+      "Are you sure you want to delete?",
+      "Deleting will permanantly remove the user from the system, continue with caution.",
+      "Delete",
+      "Cancel",
+      this.onDelete.bind(this, user)
+    );
+  }
+
+  private onDelete(user: User) {
+    this.loader.show();
+    this.users.delete(user).subscribe(
+      r => {
+        this.userList = this.userList.filter(x => x.id !== user.id);
+        this.loader.hide();
+      },
+      e => {
+        this.loader.hide();
+        if (e && e.error && e.error.error) {
+          this.toaster.show(e);
+        } else {
+          this.toaster.show(
+            "Some unknown error occurred while trying to delete the user."
+          );
+        }
+      }
+    );
   }
 }
